@@ -1,0 +1,9 @@
+.results{
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: 300ms cubic-bezier(.10, .10, .25, .90) all;
+  &.active{
+    opacity: 1;
+    transform: none;
+  }
+}
