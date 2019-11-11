@@ -1,8 +1,12 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import Form from './components/Form';
-import Results from './components/Results';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Nav from './components/Nav';
+import Search from './components/Search';
+import Favorites from './components/Favorites';
 
 const initialState = {
   currentlySearching: false,
@@ -12,7 +16,6 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch(action.type) {
     case "SEARCHING":
-      console.log('change to true');
       return{
         currentlySearching: true,
         query: state.query
@@ -32,7 +35,7 @@ const store = createStore(reducer);
 
 
 const handleChange = () => {
-  console.log(store.getState());
+  // console.log(store.getState());
   // if(store.getState().search){
   //   console.log('begin searching!');
   //   unsubscribe();
@@ -44,16 +47,25 @@ const unsubscribe = store.subscribe(handleChange)
 class App extends React.Component{
   render(){
     return (
-      // <section className="App">
-      //   <header className="App-header">
-      //     // <Form selected={'what'} />
-      //   </header>
-      // </section>
 
-      <Provider store={store}>
-        <Form />
-        <Results />
-      </Provider>
+      <Router>
+        <section className="App">
+
+          <header>
+            <Nav />
+          </header>
+
+          <Provider store={store}>
+            <Route
+              exact path="/" component={Search}
+              />
+            <Route
+              path="/favorites" component={Favorites}
+              />
+          </Provider>
+
+        </section>
+      </Router>
     )
   }
 }

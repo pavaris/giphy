@@ -1,0 +1,51 @@
+//main:styles.scss
+
+$purple: #620ce3;
+$teal: #1ee3cf;
+$orange: #fcae00;
+$orangeHover: #fbb926;
+.content-margins{
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+
+header{
+  nav{
+    ul{
+      display: flex;
+      justify-content: space-between;
+      li{
+        &.active{
+
+        }
+      }
+    }
+  }
+}
+
+
+
+button{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 50px;
+  padding: 0 35px;
+  color: #fff;
+  background: $orange;
+  border-radius: 25px;
+  border: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color ease 0.2s;
+  -webkit-appearance: none;
+  &:hover{
+    background-color: $orangeHover;
+    color: #fff;
+  }
+}

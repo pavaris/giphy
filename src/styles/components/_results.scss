@@ -1,9 +1,19 @@
+//main:../styles.scss
+
 .results{
   opacity: 0;
-  transform: translateY(-100px);
+  transform: translateY(100px);
   transition: 300ms cubic-bezier(.10, .10, .25, .90) all;
+  pointer-events: none;
   &.active{
     opacity: 1;
     transform: none;
+    pointer-events: auto;
+  }
+
+  .results-feed{
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-between;
   }
 }

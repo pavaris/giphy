@@ -325,4 +325,10 @@ template {
 }
 
 
+@import 'global';
+
+
+// components
 @import 'components/results';
+@import 'components/giphyitem';
+@import 'components/form';

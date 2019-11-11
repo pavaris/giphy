@@ -24,7 +24,11 @@ class Form extends React.Component {
   */
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.state.query);
+    this.props.query(event.target.value);
+    this.setState({
+      query: event.target.value,
+    });
+
   }
 
 
@@ -33,8 +37,6 @@ class Form extends React.Component {
     * sets component's "query" state
   */
   handleChange = (event) => {
-    console.log(this.props.search);
-    console.log(this.props.queryString);
     this.props.searching();
     this.props.query(event.target.value);
     this.setState({
@@ -49,18 +51,19 @@ class Form extends React.Component {
         <form onSubmit={this.handleSubmit}>
 
           <input
-             type='text'
+             type='search'
              id='query'
              className='input-light'
              placeholder='Search'
              autoComplete='off'
-             value={this.state.query}
+             value={this.props.queryString}
              onChange={this.handleChange}
            />
 
 
          <button
            type="submit"
+           onClick ={this.handleSubmit}
            >
            Submit
          </button>
@@ -70,8 +73,11 @@ class Form extends React.Component {
   }
 }
 
+Form.propTypes = {
+  queryString: PropTypes.string.isRequired,
+}
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     queryString: state.query,
     search: state.currentlySearching
