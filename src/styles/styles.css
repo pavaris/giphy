@@ -360,7 +360,7 @@ template {
 
 .content-margins {
   width: 90%;
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -411,6 +411,12 @@ button:hover {
   flex-wrap: wrap;
 }
 
+@media (max-width: 767px) {
+  .giphy-item {
+    width: 100%;
+  }
+}
+
 .giphy-item a {
   padding: 10px;
   background-color: white;
@@ -423,6 +429,13 @@ button:hover {
   transition: 300ms cubic-bezier(0.1, 0.1, 0.25, 0.9) all;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
   position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .giphy-item a {
+    margin-right: 0px;
+  }
 }
 
 .giphy-item a:after {
@@ -441,8 +454,66 @@ button:hover {
 .giphy-item a img {
   border-radius: 3px;
   overflow: hidden;
+  width: 100%;
+  height: auto;
+}
+
+.giphy-item a .svg-holder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.giphy-item a .svg-holder .hearts {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  pointer-events: none;
+  transform: translateY(100%);
+  user-select: none;
+}
+
+.giphy-item a .svg-holder .hearts .heart {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  opacity: 0.8;
+}
+
+@media (max-width: 767px) {
+  .giphy-item a .svg-holder .hearts .heart {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.giphy-item a .svg-holder .hearts .heart path {
+  fill: white;
 }
 
 .giphy-item.active a {
   background-color: #620ce3;
+}
+
+.giphy-item.active .svg-holder {
+  animation: fadeIn forwards 2.25s;
+}
+
+.giphy-item.active .svg-holder .hearts {
+  transform: translateY(-120%);
+  transition: 2s cubic-bezier(0.1, 0.1, 0.25, 0.9) all 0.2s;
+}
+
+@keyframes fadeIn {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(98, 12, 227, 0.7);
+  }
+  100% {
+    background-color: transparent;
+  }
 }

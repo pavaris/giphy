@@ -1,6 +1,9 @@
 //main:../styles.scss
 
 .giphy-item{
+  @media(max-width: 767px){
+    width: 100%;
+  }
   a{
     padding: 10px;
     // border: 1px solid rgba(0,0,0,0.2);
@@ -14,6 +17,10 @@
     transition: 300ms cubic-bezier(.10, .10, .25, .90) all;
     box-shadow: 0 2px 10px 0 rgba(0,0,0,0.08);
     position: relative;
+    overflow: hidden;
+    @media(max-width: 767px){
+      margin-right: 0px;
+    }
     &:after{
       content: "";
       position: absolute;
@@ -29,11 +36,62 @@
     img{
       border-radius: 3px;
       overflow: hidden;
+      width: 100%;
+      height: auto;
+    }
+    .svg-holder{
+      position: absolute;
+      left: 0;
+      top:0;
+      height: 100%;
+      width: 100%;
+
+      .hearts{
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        pointer-events: none;
+        transform: translateY(100%);
+        user-select: none;
+        .heart{
+          position: absolute;
+          height: 15px;
+          width: 15px;
+          opacity: 0.8;
+          @media(max-width: 767px){
+            height: 20px;
+            width: 20px;
+          }
+          path{
+            fill: white;
+          }
+
+        }
+      }
     }
   }
   &.active{
     a{
       background-color: $purple;
     }
+    .svg-holder{
+      animation: fadeIn forwards 2.25s;
+      .hearts{
+        transform: translateY(-120%);
+        transition: 2s cubic-bezier(.10, .10, .25, .90) all 0.2s;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn{
+  0%{
+    background-color: transparent;
+  }
+  50%{
+    background-color: rgba(	98, 12, 227,0.7);
+  }
+  100%{
+    background-color: transparent;
   }
 }
