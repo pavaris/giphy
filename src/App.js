@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStore } from 'redux';
+
 import { Provider } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -8,38 +8,18 @@ import Nav from './components/Nav';
 import Search from './components/Search';
 import Favorites from './components/Favorites';
 
-const initialState = {
-  currentlySearching: false,
-  query: ''
-};
-
-function reducer(state = initialState, action) {
-  switch(action.type) {
-    case "SEARCHING":
-      return{
-        currentlySearching: true,
-        query: state.query
-      };
-    case "QUERY":
-      return{
-        currentlySearching: true,
-        query: action.query
-      };
-
-    default:
-      return state;
-  }
-}
-
-const store = createStore(reducer);
+import store from './store';
+import { updateLocalStorage } from './utils/localstorage'
 
 
+
+/**
+  * Store subscription
+  * updates localStorage with favorited gifs array
+*/
 const handleChange = () => {
-  // console.log(store.getState());
-  // if(store.getState().search){
-  //   console.log('begin searching!');
-  //   unsubscribe();
-  // }
+  console.log(store.getState().favorited);
+  updateLocalStorage(JSON.stringify(store.getState().favorited));
 }
 const unsubscribe = store.subscribe(handleChange)
 

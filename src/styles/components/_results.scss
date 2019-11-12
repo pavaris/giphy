@@ -10,10 +10,10 @@
     transform: none;
     pointer-events: auto;
   }
+}
 
-  .results-feed{
-    display: flex;
-    flex-wrap: wrap;
-    // justify-content: space-between;
-  }
+.results-feed{
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-between;
 }

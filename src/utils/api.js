@@ -10,3 +10,6 @@ export const fetchGifs = (query, offset, interval) => {
           return data
         })
 }
+
+
+// TODO: store api key in env var

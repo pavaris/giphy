@@ -34,7 +34,7 @@ class Results extends React.Component{
 
 
   componentDidUpdate(prevProps, prevState){
-    if(prevProps.queryString != this.props.queryString){
+    if(prevProps.queryString !== this.props.queryString){
       console.log(prevProps.queryString,  this.props.queryString);
       fetchGifs(this.props.queryString, 0, this.state.interval)
         .then((response) => {
@@ -97,9 +97,8 @@ class Results extends React.Component{
             {this.state.results.images.map((x) =>
               <GiphyItem
                 key={x.id}
-                giphyID={x.id}
-                imgUrl={x.images.fixed_width_downsampled.url}
-                title={x.title}
+                giphyObj={x}
+                liked={this.props.favoritedArr.filter(e => e.id === x.id).length > 0}
                 />
             )}
           </ul>
@@ -128,10 +127,11 @@ Results.propTypes = {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     queryString: state.query,
-    search: state.currentlySearching
+    search: state.currentlySearching,
+    favoritedArr: state.favorited
   };
 }
 

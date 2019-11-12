@@ -406,7 +406,7 @@ button:hover {
   pointer-events: auto;
 }
 
-.results .results-feed {
+.results-feed {
   display: flex;
   flex-wrap: wrap;
 }
