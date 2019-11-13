@@ -104,7 +104,8 @@ class Results extends React.Component{
     * if window is scrolled to the last elemnt in the results feed, load more gif
   */
   handleScroll = () => {
-    if(this.props.searching){
+    if(this.props.search){
+      console.log('scrolly');
       var lastLi = document.querySelector("ul.results-feed > li:last-child");
       var lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
       var pageOffset = window.pageYOffset + window.innerHeight;
