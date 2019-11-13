@@ -1,9 +1,6 @@
 import { createStore } from 'redux';
 import { getLocalStorage, initLocalStorage } from './utils/localstorage';
 
-console.log('store!');
-
-
 
 const initialState = {
   currentlySearching: false,
@@ -11,9 +8,11 @@ const initialState = {
   favorited: []
 };
 
-if(getLocalStorage() !== null){
-  initialState.favorited = getLocalStorage();
-}
+/**
+  * if getLocalStorage() returns null, initialize localStorage.
+  * otherwise set initialState.favorited to localStorage arr.
+*/
+getLocalStorage() !== null ? initialState.favorited = getLocalStorage() : initLocalStorage();
 
 
 function reducer(state = initialState, action) {

@@ -4,7 +4,7 @@
   @media(max-width: 767px){
     width: 100%;
   }
-  a{
+  button{
     padding: 10px;
     // border: 1px solid rgba(0,0,0,0.2);
     background-color: white;
@@ -71,7 +71,7 @@
     }
   }
   &.active{
-    a{
+    button{
       background-color: $purple;
     }
     .svg-holder{

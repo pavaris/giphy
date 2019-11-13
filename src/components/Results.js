@@ -9,41 +9,31 @@ import { fetchGifs } from '../utils/api';
 class Results extends React.Component{
 
 
-  constructor(props){
-    super(props);
-    this.state = {
-      results: {
-        images: []
-      },
-      offset: 0,
-      interval: 20,
-      loading: false
-    }
-  }
-
-  resetState = () => {
-    this.setState({
-      results: {
-        images: []
-      },
-      loading: true
-    })
+  state = {
+    results: {
+      images: []
+    },
+    offset: 0,
+    interval: 20,
+    loading: false
   }
 
 
 
-
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate = (prevProps, prevState) => {
     if(prevProps.queryString !== this.props.queryString){
-      console.log(prevProps.queryString,  this.props.queryString);
+      this.setState({
+        loading: true
+      });
+      console.log('loading');
       fetchGifs(this.props.queryString, 0, this.state.interval)
         .then((response) => {
+          console.log('no more loading');
           this.setState({
             results:{
-              images: response.data
-            },
-            offset: 0,
-            loading: false
+              images: response.data,
+              loading: false
+            }
           });
         }
       );
@@ -53,11 +43,23 @@ class Results extends React.Component{
 
 
   /**
+    * adds scrolling listener, calls handleScroll
+  */
+  componentDidMount = () =>{
+    console.log(this.props.favoritedArr);
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+
+  /**
     * Load More Gifs
     * pulls in more gifs based on interval number and offset value
     * excludes duplicate gifs based on giphy id
   */
-  loadMore(){
+  loadMore = () => {
+    this.setState({
+      loading: true
+    })
     fetchGifs(this.props.queryString, this.state.offset + this.state.interval, this.state.interval)
       .then((response) => {
 
@@ -80,10 +82,20 @@ class Results extends React.Component{
   }
 
 
+  /**
+    * if window is scrolled to the last elemnt in the results feed, load more gif
+  */
+  handleScroll = () => {
+    var lastLi = document.querySelector("ul.results-feed > li:last-child");
+    var lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
+    var pageOffset = window.pageYOffset + window.innerHeight;
+    if (pageOffset > lastLiOffset) {
+      console.log('endscroll');
+      this.loadMore();
+    }
+  }
+
   render(){
-
-    let compClassName = this.props.search ? 'results active' : 'results';
-
 
     /**
       * if queryString is not empty, show search results feed
@@ -91,22 +103,34 @@ class Results extends React.Component{
     */
     if (this.props.queryString.length > 0){
       return(
-        <div>
-          <h2>Results for <span>{this.props.queryString}</span></h2>
-          <ul className="results-feed">
-            {this.state.results.images.map((x) =>
-              <GiphyItem
-                key={x.id}
-                giphyObj={x}
-                liked={this.props.favoritedArr.filter(e => e.id === x.id).length > 0}
-                />
-            )}
-          </ul>
-          <button
-            onClick={e => {
-              this.loadMore();
-            }}
-          >Load More</button>
+          <div>
+            <h2>Results for <span>{this.props.queryString}</span></h2>
+            {this.state.results.images.length > 0 &&
+
+              <div>
+                <ul className="results-feed">
+                  {this.state.results.images.map((x) =>
+                    <GiphyItem
+                      key={x.id}
+                      giphyObj={x}
+                      liked={this.props.favoritedArr.filter(e => e.id === x.id).length > 0}
+                      />
+                  )}
+                </ul>
+                <button
+                  onClick={e => {
+                    this.loadMore();
+                  }}
+                  className='button'
+                >Load More</button>
+              </div>
+            }
+
+            {this.state.results.images.length === 0 &&
+              <h3>We couldn't find anything. Try again maybe?</h3>
+            }
+
+
         </div>
       )
     }else{
@@ -124,6 +148,7 @@ class Results extends React.Component{
 Results.propTypes = {
   queryString: PropTypes.string.isRequired,
   search: PropTypes.bool.isRequired,
+  favoritedArr: PropTypes.array.isRequired,
 }
 
 

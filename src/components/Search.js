@@ -1,10 +1,22 @@
 import React from 'react';
-import Form from './Form';
-import Results from './Results';
+import { useEffect }  from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+
+import Form from './Form';
+import Results from './Results';
+import { searching, query } from './../actions';
+
 const Search = (props) => {
+
+  useEffect(() => {
+    return () => {
+      console.log('what');
+      props.query('');
+    }
+  }, [])
+
   let compClassName = props.search ? 'results active' : 'results';
 
 
@@ -32,4 +44,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Search);
+const mapDispatchToProps = {
+  searching,
+  query
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

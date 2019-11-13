@@ -43,16 +43,21 @@ class GiphyItem extends React.Component{
     let giphyObj = this.props.giphyObj;
     return(
       <li className={compClassName}>
-        <a href="#" onClick={ this.handleClick } >
+        <button onClick={ this.handleClick } >
           <img src={giphyObj.images.fixed_width_downsampled.url} alt={giphyObj.title}/>
           <div className="svg-holder">
             <Heart />
           </div>
-        </a>
+        </button>
 
       </li>
     )
   }
+}
+
+GiphyItem.propTypes = {
+  giphyObj: PropTypes.object.isRequired,
+  liked: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = (state) => {

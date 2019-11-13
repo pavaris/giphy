@@ -7,6 +7,7 @@ const Favorites = (props) => {
     <div id="favorites">
       <div className="content-margins">
         <h1>Your favorited Gifs</h1>
+        {props.favoritedArr.length > 0 ? (
           <ul className="results-feed">
             {props.favoritedArr.map((x) =>
               <GiphyItem
@@ -16,6 +17,10 @@ const Favorites = (props) => {
                 />
             )}
           </ul>
+        ) : (
+          <h2>You don't have any favorites</h2>  
+        )}
+
       </div>
     </div>
   )

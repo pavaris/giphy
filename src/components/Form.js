@@ -7,13 +7,8 @@ import { searching, query } from './../actions';
 
 class Form extends React.Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      query: '',
-    }
-
+  state = {
+    query: '',
   }
 
 
@@ -64,6 +59,7 @@ class Form extends React.Component {
          <button
            type="submit"
            onClick ={this.handleSubmit}
+           className='button'
            >
            Submit
          </button>

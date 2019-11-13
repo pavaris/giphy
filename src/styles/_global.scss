@@ -27,9 +27,11 @@ header{
   }
 }
 
-
-
 button{
+  cursor: pointer;
+}
+
+.button{
   position: relative;
   align-items: center;
   justify-content: center;
@@ -46,6 +48,7 @@ button{
   cursor: pointer;
   transition: background-color ease 0.2s;
   -webkit-appearance: none;
+  display: inline-block;
   &:hover{
     background-color: $orangeHover;
     color: #fff;
