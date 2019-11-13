@@ -12,7 +12,6 @@ const Search = (props) => {
 
   useEffect(() => {
     return () => {
-      console.log('what');
       props.query('');
     }
   }, [])
@@ -23,7 +22,9 @@ const Search = (props) => {
   return(
     <div id="search-container" className={compClassName}>
       <div className="content-margins">
-        <h1>Search for a Gif</h1>
+        {!props.queryString.length > 0 &&
+          <h1>Search for a Gif</h1>
+        }
         <Form />
         {props.queryString.length > 0  &&
           <section className='results'>

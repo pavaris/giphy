@@ -122,7 +122,7 @@ class Results extends React.Component{
 
       return(
           <div>
-            <h2>Results for <span>{this.props.queryString}</span></h2>
+            <h1>Results for <span>{this.props.queryString}</span></h1>
             {this.state.results.images.length > 0 &&
 
               <div>
