@@ -32,9 +32,11 @@ class Results extends React.Component{
           this.setState({
             results:{
               images: response.data,
-              loading: false
-            }
+            },
+            loading: false
           });
+
+
         }
       );
     }
@@ -46,6 +48,23 @@ class Results extends React.Component{
     * adds scrolling listener, calls handleScroll
   */
   componentDidMount = () =>{
+    if(this.props.queryString.length > 0){
+      this.setState({
+        loading: true
+      });
+      console.log('loading');
+      fetchGifs(this.props.queryString, 0, this.state.interval)
+        .then((response) => {
+          console.log('no more loading');
+          this.setState({
+            results:{
+              images: response.data,
+            },
+            loading: false
+          });
+        }
+      );
+    }
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -97,12 +116,9 @@ class Results extends React.Component{
   }
 
   render(){
+      let loading = this.state.loading;
+      let noResults = !loading && this.state.results.images.length === 0;
 
-    /**
-      * if queryString is not empty, show search results feed
-      * else ask user to search
-    */
-    if (this.props.queryString.length > 0){
       return(
           <div>
             <h2>Results for <span>{this.props.queryString}</span></h2>
@@ -123,20 +139,17 @@ class Results extends React.Component{
               </div>
             }
 
-            {this.state.results.images.length === 0 &&
+            {loading &&
+              <div>loading...</div>
+            }
+            {noResults &&
               <h3>We couldn't find anything. Try again maybe?</h3>
             }
 
 
         </div>
       )
-    }else{
-      return(
-        <div>
-          <h2>Search please!</h2>
-        </div>
-      )
-    }
+
 
   }
 }

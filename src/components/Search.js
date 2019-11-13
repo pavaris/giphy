@@ -24,11 +24,11 @@ const Search = (props) => {
     <div id="search-container" className={compClassName}>
       <div className="content-margins">
         <Form />
-
-        <section className='results'>
-          <Results />
-        </section>
-
+        {props.queryString.length > 0  &&
+          <section className='results'>
+            <Results />
+          </section>
+        }
 
       </div>
     </div>
