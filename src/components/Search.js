@@ -17,16 +17,19 @@ const Search = (props) => {
     }
   }, [])
 
-  let compClassName = props.search ? 'results active' : 'results';
+  let compClassName = props.search ? 'active' : '';
 
 
   return(
-    <div id="search-container">
+    <div id="search-container" className={compClassName}>
       <div className="content-margins">
         <Form />
-        <section className={compClassName}>
+
+        <section className='results'>
           <Results />
         </section>
+
+
       </div>
     </div>
   )
@@ -34,6 +37,7 @@ const Search = (props) => {
 
 Search.propTypes = {
   search: PropTypes.bool.isRequired,
+  queryString: PropTypes.string.isRequired
 }
 
 

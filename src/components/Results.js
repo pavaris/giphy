@@ -46,7 +46,6 @@ class Results extends React.Component{
     * adds scrolling listener, calls handleScroll
   */
   componentDidMount = () =>{
-    console.log(this.props.favoritedArr);
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -86,13 +85,15 @@ class Results extends React.Component{
     * if window is scrolled to the last elemnt in the results feed, load more gif
   */
   handleScroll = () => {
-    var lastLi = document.querySelector("ul.results-feed > li:last-child");
-    var lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
-    var pageOffset = window.pageYOffset + window.innerHeight;
-    if (pageOffset > lastLiOffset) {
-      console.log('endscroll');
-      this.loadMore();
+    if(this.props.searching){
+      var lastLi = document.querySelector("ul.results-feed > li:last-child");
+      var lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
+      var pageOffset = window.pageYOffset + window.innerHeight;
+      if (pageOffset > lastLiOffset - 100) {
+        this.loadMore();
+      }
     }
+
   }
 
   render(){
@@ -109,20 +110,16 @@ class Results extends React.Component{
 
               <div>
                 <ul className="results-feed">
-                  {this.state.results.images.map((x) =>
+                  {this.state.results.images.map((x, i) =>
                     <GiphyItem
                       key={x.id}
                       giphyObj={x}
                       liked={this.props.favoritedArr.filter(e => e.id === x.id).length > 0}
+                      index={i}
                       />
                   )}
                 </ul>
-                <button
-                  onClick={e => {
-                    this.loadMore();
-                  }}
-                  className='button'
-                >Load More</button>
+
               </div>
             }
 

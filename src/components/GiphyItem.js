@@ -41,8 +41,12 @@ class GiphyItem extends React.Component{
   render(){
     let compClassName = this.state.liked ? 'giphy-item active' : 'giphy-item';
     let giphyObj = this.props.giphyObj;
+    // let styles = {animationDelay: toString(this.props.index * 100) + 'ms' }
+    let styles = {animationDelay: ((this.props.index % 20) * 50) + 'ms' }
+
+
     return(
-      <li className={compClassName}>
+      <li className={compClassName} style={styles} index={this.props.index}>
         <button onClick={ this.handleClick } >
           <img src={giphyObj.images.fixed_width_downsampled.url} alt={giphyObj.title}/>
           <div className="svg-holder">
@@ -57,7 +61,7 @@ class GiphyItem extends React.Component{
 
 GiphyItem.propTypes = {
   giphyObj: PropTypes.object.isRequired,
-  liked: PropTypes.array.isRequired,
+  liked: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => {

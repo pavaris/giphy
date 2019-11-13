@@ -19,11 +19,8 @@ class Form extends React.Component {
   */
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.query(event.target.value);
-    this.setState({
-      query: event.target.value,
-    });
-
+    this.props.searching();
+    this.props.query(this.state.query);
   }
 
 
@@ -58,7 +55,6 @@ class Form extends React.Component {
 
          <button
            type="submit"
-           onClick ={this.handleSubmit}
            className='button'
            >
            Submit

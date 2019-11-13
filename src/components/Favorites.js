@@ -9,16 +9,17 @@ const Favorites = (props) => {
         <h1>Your favorited Gifs</h1>
         {props.favoritedArr.length > 0 ? (
           <ul className="results-feed">
-            {props.favoritedArr.map((x) =>
+            {props.favoritedArr.map((x, i) =>
               <GiphyItem
                 key={x.id}
                 giphyObj={x}
                 liked={true}
+                index={i}
                 />
             )}
           </ul>
         ) : (
-          <h2>You don't have any favorites</h2>  
+          <h2>You don't have any favorites</h2>
         )}
 
       </div>
