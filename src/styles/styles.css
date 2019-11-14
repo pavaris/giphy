@@ -719,3 +719,17 @@ form input[type='search'] {
 .no-favorites img {
   margin-bottom: 30px;
 }
+
+#page404 {
+  padding-top: 60px;
+}
+
+#page404 .content-margins {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#page404 img {
+  margin-bottom: 30px;
+}

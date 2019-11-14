@@ -1,0 +1,13 @@
+//main:../styles.scss
+
+#page404{
+  padding-top: 60px;
+  .content-margins{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  img{
+    margin-bottom: 30px;
+  }
+}

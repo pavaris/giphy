@@ -34,9 +34,7 @@ const store = createStore(reducer, initialState);
   * updates localStorage with favorited gifs array
 */
 const handleChange = () => {
-  if(store.getState().favorited.length){
     updateLocalStorage(JSON.stringify(store.getState().favorited));
-  }
 
 }
 const unsubscribe = store.subscribe(handleChange)
