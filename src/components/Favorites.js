@@ -24,9 +24,13 @@ class Favorites extends React.Component{
 
   render(){
     return(
-      <div id="favorites">
+      <section id="favorites">
         <div className="content-margins">
-          <h1>Your favorited Gifs</h1>
+          <div className="section-header">
+            <h1>Your favorited Gifs</h1>
+            {this.props.favoritedArr.length > 0 &&
+              <h5>(click to unfavorite)</h5>
+            }</div>
           {this.props.favoritedArr.length ? (
             <ul className="results-feed">
               {this.props.favoritedArr.map((x, i) =>
@@ -47,7 +51,7 @@ class Favorites extends React.Component{
           )}
 
         </div>
-      </div>
+      </section>
     )
   }
 }

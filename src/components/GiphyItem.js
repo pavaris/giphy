@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Heart from './../assets/Heart.js'
 import { connect } from 'react-redux';
 import { favorited } from './../actions/favorited';
-import { unfavorited } from './../actions/unfavorited';
 
 
 class GiphyItem extends React.Component{
@@ -72,7 +71,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   favorited,
-  unfavorited
 };
 
 

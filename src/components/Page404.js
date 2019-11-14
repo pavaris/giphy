@@ -20,16 +20,18 @@ class Page404 extends React.Component{
 
   render(){
     return(
-      <div id="page404">
+      <section id="page404">
         <div className="content-margins">
-          <h1>Hey, where are you going?</h1>
+          <div className="section-header">
+            <h1>Hey! Where are you going?</h1>
+          </div>
           <img src={this.state.imgURL} alt={this.state.alt}/>
 
           <div className="not-found-content">
             <Link to='/' className="button">Let's get back to searching</Link>
           </div>
         </div>
-      </div>
+      </section>
     )
   }
 
