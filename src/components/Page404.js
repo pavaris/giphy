@@ -9,7 +9,7 @@ class Page404 extends React.Component{
   }
 
   componentDidMount(){
-    fetchRandomGif('cry', 0, 1)
+    fetchRandomGif('confusion', 0, 1)
       .then((response) => {
         this.setState({
           imgURL: response.data.images.fixed_height_downsampled.url,
