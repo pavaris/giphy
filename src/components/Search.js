@@ -16,26 +16,29 @@ const Search = (props) => {
 
   return(
     <div id="search-container" className={compClassName}>
-      <div className="content-margins">
+
 
       <section className="search-form">
         <div className="search-form-inner">
-            {!props.queryString.length &&
-              <h1>Search for a Gif</h1>
-            }
-            {props.queryString.length > 0 &&
-              <h1>Results for <em>{props.queryString}</em></h1>
-            }
-          <Form />
+            <div className="content-margins">
+              {!props.queryString.length &&
+                <h1>Search for a Gif</h1>
+              }
+              {props.queryString.length > 0 &&
+                <h1>Results for <em>{props.queryString}</em></h1>
+              }
+                        <Form />
+            </div>
         </div>
       </section>
         {props.queryString.length > 0 &&
           <section className='results'>
-            <Results />
+            <div className="content-margins">
+              <Results />
+            </div>
           </section>
         }
 
-      </div>
     </div>
   )
 }
