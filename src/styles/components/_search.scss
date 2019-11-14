@@ -1,0 +1,44 @@
+//main:../styles.scss
+
+.search-form{
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms cubic-bezier(.10, .10, .25, .90) all;
+  position: sticky;
+  position: -webkit-sticky;
+  top:0;
+  z-index: 1;
+  padding-top: 60px;
+  margin-bottom: 30px;
+  .search-form-inner{
+    width: 70vw;
+    @media(max-width: 767px){
+      width: 100%;
+    }
+  }
+}
+
+#search-container{
+  &.active{
+    .search-form{
+      height: 175px;
+    }
+  }
+}
+
+
+form{
+  width: 100%;
+  display: flex;
+  input[type='search']{
+    box-shadow: 0 7px 16px -10px rgba(0,0,0,0.16);
+    border: solid 1px #dbdbdb;
+    border-radius: 6px;
+    padding: 15px;
+    margin-right: 20px;
+    font-size: 16px;
+    width: 100%;
+  }
+}

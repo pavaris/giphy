@@ -1,16 +1,15 @@
 //main:../styles.scss
 
-// .results{
-//   opacity: 0;
-//   transform: translateY(100px);
-//   transition: 300ms cubic-bezier(.10, .10, .25, .90) all;
-//   pointer-events: none;
-//   &.active{
-//     opacity: 1;
-//     transform: none;
-//     pointer-events: auto;
-//   }
-// }
+.results{
+  position: relative;
+  // h1{
+  //   text-align: center;
+  //   position: sticky;
+  //   position: -webkit-sticky;
+  //   top: 0;
+  //   z-index: 1;
+  // }
+}
 
 .results-feed{
   display: flex;

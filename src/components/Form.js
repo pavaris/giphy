@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { searching, query } from './../actions';
+import { searching } from './../actions/searching';
+import { query  } from './../actions/query';
 
 
 
@@ -19,7 +20,7 @@ class Form extends React.Component {
   */
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.searching();
+    this.state.query.length ? this.props.searching(true) : this.props.searching(false);
     this.props.query(this.state.query);
   }
 
@@ -29,7 +30,9 @@ class Form extends React.Component {
     * sets component's "query" state
   */
   handleChange = (event) => {
-    this.props.searching();
+
+    event.target.value.length ? this.props.searching(true) : this.props.searching(false);
+
     this.props.query(event.target.value);
     this.setState({
       query: event.target.value,
@@ -57,7 +60,7 @@ class Form extends React.Component {
            type="submit"
            className='button'
            >
-           Submit
+           Let's Go
          </button>
         </form>
 
@@ -72,7 +75,7 @@ Form.propTypes = {
 const mapStateToProps = (state) => {
   return {
     queryString: state.query,
-    search: state.currentlySearching
+    search: state.searching
   };
 }
 

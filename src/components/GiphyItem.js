@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Heart from './../icons/Heart.js'
+import Heart from './../assets/Heart.js'
 import { connect } from 'react-redux';
-import { favorited, unfavorited } from './../actions';
+import { favorited } from './../actions/favorited';
+import { unfavorited } from './../actions/unfavorited';
 
 
 class GiphyItem extends React.Component{
@@ -10,24 +11,22 @@ class GiphyItem extends React.Component{
     super(props);
 
     this.state = {
-      liked: false
+      liked: false,
+      clickedOn: false
     }
   }
 
-  handleClick = (e) => {
-    e.preventDefault();
+  handleClick = () => {
     this.setState({
       liked: !this.state.liked,
     });
     if(!this.state.liked === true){
-      console.log('like');
-      this.props.favorited(this.props.giphyObj)
+      this.props.favorited([...this.props.favoritedArr, this.props.giphyObj]);
     }else{
-      console.log('unlike');
-      this.props.unfavorited(this.props.giphyObj);
+      this.props.favorited(this.props.favoritedArr.filter(x => x.id !== this.props.giphyObj.id));
     }
-  }
 
+  }
 
   componentDidMount(){
     if(this.props.liked === true){
@@ -42,7 +41,7 @@ class GiphyItem extends React.Component{
     let compClassName = this.state.liked ? 'giphy-item active' : 'giphy-item';
     let giphyObj = this.props.giphyObj;
     // let styles = {animationDelay: toString(this.props.index * 100) + 'ms' }
-    let styles = {animationDelay: ((this.props.index % 20) * 50) + 'ms' }
+    let styles = {animationDelay: ((this.props.index % 20) * 100) + 'ms' }
 
 
     return(
@@ -62,6 +61,7 @@ class GiphyItem extends React.Component{
 GiphyItem.propTypes = {
   giphyObj: PropTypes.object.isRequired,
   liked: PropTypes.bool.isRequired,
+  favoritedArr: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -76,6 +76,4 @@ const mapDispatchToProps = {
 };
 
 
-export default connect(null, mapDispatchToProps)(GiphyItem);
-
-// // TODO: import list of liked gifs, show liked status if liked
+export default connect(mapStateToProps, mapDispatchToProps)(GiphyItem);

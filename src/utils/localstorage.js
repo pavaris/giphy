@@ -9,8 +9,8 @@ export const updateLocalStorage = (favorited) => {
 export const getLocalStorage = () => {
   let favoritedGifs = JSON.parse(localStorage.getItem('favoritedGifs'));
   if(favoritedGifs !== null){
-    if(favoritedGifs.length > 0){
-      return localStorageValidation(favoritedGifs).length > 0 ? localStorageValidation(favoritedGifs) : null ;
+    if(favoritedGifs.length){
+      return localStorageValidation(favoritedGifs).length ? localStorageValidation(favoritedGifs) : null ;
     }else{
       return null;
     }

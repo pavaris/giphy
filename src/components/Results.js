@@ -25,10 +25,8 @@ class Results extends React.Component{
       this.setState({
         loading: true
       });
-      console.log('loading');
       fetchGifs(this.props.queryString, 0, this.state.interval)
         .then((response) => {
-          console.log('no more loading');
           this.setState({
             results:{
               images: response.data,
@@ -48,14 +46,12 @@ class Results extends React.Component{
     * adds scrolling listener, calls handleScroll
   */
   componentDidMount = () =>{
-    if(this.props.queryString.length > 0){
+    if(this.props.queryString.length){
       this.setState({
         loading: true
       });
-      console.log('loading');
       fetchGifs(this.props.queryString, 0, this.state.interval)
         .then((response) => {
-          console.log('no more loading');
           this.setState({
             results:{
               images: response.data,
@@ -66,6 +62,10 @@ class Results extends React.Component{
       );
     }
     window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
 
@@ -105,7 +105,6 @@ class Results extends React.Component{
   */
   handleScroll = () => {
     if(this.props.search){
-      console.log('scrolly');
       var lastLi = document.querySelector("ul.results-feed > li:last-child");
       var lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
       var pageOffset = window.pageYOffset + window.innerHeight;
@@ -122,7 +121,7 @@ class Results extends React.Component{
 
       return(
           <div>
-            <h1>Results for <span>{this.props.queryString}</span></h1>
+
             {this.state.results.images.length > 0 &&
 
               <div>
@@ -166,7 +165,7 @@ Results.propTypes = {
 const mapStateToProps = (state) => {
   return {
     queryString: state.query,
-    search: state.currentlySearching,
+    search: state.searching,
     favoritedArr: state.favorited
   };
 }
