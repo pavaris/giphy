@@ -1,41 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { searching, query } from './../actions';
-
-
+import { searching } from './../actions/searching';
+import { query  } from './../actions/query';
+import { DebounceInput } from 'react-debounce-input';
 
 class Form extends React.Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      query: '',
-    }
-
+  state = {
+    query: '',
   }
 
-
-
-  /**
-    * Form submission handler
-    *
-  */
+  /** Form submission handler */
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.state.query);
+    this.state.query.length ? this.props.searching(true) : this.props.searching(false);
+    this.props.query(this.state.query);
   }
 
 
   /**
     * Input change handler
     * sets component's "query" state
+    * dispatches new query from input
+    * dispatches searching state
   */
   handleChange = (event) => {
-    console.log(this.props.search);
-    console.log(this.props.queryString);
-    this.props.searching();
+
+    event.target.value.length ? this.props.searching(true) : this.props.searching(false);
+
     this.props.query(event.target.value);
     this.setState({
       query: event.target.value,
@@ -48,21 +41,17 @@ class Form extends React.Component {
     return (
         <form onSubmit={this.handleSubmit}>
 
-          <input
-             type='text'
-             id='query'
-             className='input-light'
-             placeholder='Search'
-             autoComplete='off'
-             value={this.state.query}
-             onChange={this.handleChange}
-           />
-
+          <DebounceInput
+            debounceTimeout={200}
+            onChange={this.handleChange}
+            value={this.props.queryString}
+            />
 
          <button
            type="submit"
+           className='button'
            >
-           Submit
+           Let's Go
          </button>
         </form>
 
@@ -70,11 +59,15 @@ class Form extends React.Component {
   }
 }
 
+Form.propTypes = {
+  queryString: PropTypes.string.isRequired,
+  search: PropTypes.bool.isRequired,
+}
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     queryString: state.query,
-    search: state.currentlySearching
+    search: state.searching
   };
 }
 
@@ -83,5 +76,4 @@ const mapDispatchToProps = {
   query
 };
 
-// export default Form;
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

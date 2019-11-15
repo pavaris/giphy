@@ -1,9 +1,26 @@
+//main:../styles.scss
+
 .results{
-  opacity: 0;
-  transform: translateY(-100px);
-  transition: 300ms cubic-bezier(.10, .10, .25, .90) all;
-  &.active{
-    opacity: 1;
-    transform: none;
+  position: relative;
+  // h1{
+  //   text-align: center;
+  //   position: sticky;
+  //   position: -webkit-sticky;
+  //   top: 0;
+  //   z-index: 1;
+  // }
+}
+
+.results-feed{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: space-around;
+}
+
+.no-results{
+  padding: 20px 0;
+  h2{
+    text-align: center;
   }
 }

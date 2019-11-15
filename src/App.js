@@ -1,59 +1,35 @@
 import React from 'react';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import Form from './components/Form';
-import Results from './components/Results';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-const initialState = {
-  currentlySearching: false,
-  query: ''
-};
-
-function reducer(state = initialState, action) {
-  switch(action.type) {
-    case "SEARCHING":
-      console.log('change to true');
-      return{
-        currentlySearching: true,
-        query: state.query
-      };
-    case "QUERY":
-      return{
-        currentlySearching: true,
-        query: action.query
-      };
-
-    default:
-      return state;
-  }
-}
-
-const store = createStore(reducer);
-
-
-const handleChange = () => {
-  console.log(store.getState());
-  // if(store.getState().search){
-  //   console.log('begin searching!');
-  //   unsubscribe();
-  // }
-}
-const unsubscribe = store.subscribe(handleChange)
+import Nav from './components/Nav';
+import Search from './components/Search';
+import Favorites from './components/Favorites';
+import Page404 from './components/Page404';
 
 
 class App extends React.Component{
   render(){
     return (
-      // <section className="App">
-      //   <header className="App-header">
-      //     // <Form selected={'what'} />
-      //   </header>
-      // </section>
 
-      <Provider store={store}>
-        <Form />
-        <Results />
-      </Provider>
+      <Router>
+        <section className="App">
+
+          <header>
+            <Nav />
+          </header>
+
+          <Switch>
+            <Route
+              exact path="/" component={Search}
+              />
+            <Route
+              path="/favorites" component={Favorites}
+              />
+            <Route component={Page404}/>
+          </Switch>
+        
+        </section>
+      </Router>
     )
   }
 }

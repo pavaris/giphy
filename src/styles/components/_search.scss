@@ -1,0 +1,92 @@
+//main:../styles.scss
+
+.search-form{
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms cubic-bezier(.10, .10, .25, .90) all;
+  position: sticky;
+  position: -webkit-sticky;
+  top:0;
+  z-index: 1;
+  padding-top: 60px;
+  padding-bottom: 30px;
+  .search-form-inner{
+    width: 70vw;
+    em{
+      color: $teal;
+    }
+    @media(max-width: 767px){
+      width: 100%;
+    }
+  }
+  h1{
+    margin-bottom: 0px;
+    font-weight: 100;
+    span{
+      font-weight: 900;
+    }
+  }
+  h6{
+    margin-bottom: 10px;
+  }
+}
+
+#search-container{
+  &.active{
+    h1{
+      font-weight: 900;
+      em{
+        font-weight: 100;
+        word-break: break-all;
+      }
+    }
+    .search-form{
+      height: 175px;
+      background-color: rgba(255,255,255,0.9);
+    }
+  }
+}
+
+
+form{
+  width: 100%;
+  display: flex;
+  input[type='text']{
+    box-shadow: 0 7px 16px -10px rgba(0,0,0,0.16);
+    border: solid 1px #dbdbdb;
+    border-radius: 6px;
+    padding: 15px;
+    margin-right: 20px;
+    font-size: 16px;
+    width: 100%;
+  }
+}
+
+.loading-text{
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  animation: animateLoad infinite 1s;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 900;
+  margin: 20px 0 30px 0;
+  color: $purple;
+}
+@keyframes animateLoad{
+  0%{
+    opacity: 1;
+    letter-spacing: 1px;
+  }
+  100%{
+    opacity: 0;
+    letter-spacing: 15px;
+  }
+}
+
+#results{
+  padding-top: 20px;
+}
