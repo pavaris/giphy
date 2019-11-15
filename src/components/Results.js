@@ -27,14 +27,13 @@ class Results extends React.Component{
       });
       fetchGifs(this.props.queryString, 0, this.state.interval)
         .then((response) => {
+          window.scrollTo(0, 0);
           this.setState({
             results:{
               images: response.data,
             },
             loading: false
           });
-
-
         }
       );
     }
@@ -75,28 +74,37 @@ class Results extends React.Component{
     * excludes duplicate gifs based on giphy id
   */
   loadMore = () => {
-    this.setState({
-      loading: true
-    })
-    fetchGifs(this.props.queryString, this.state.offset + this.state.interval, this.state.interval)
-      .then((response) => {
 
+    /** Doesn't run if still loading last query */
+    if(!this.state.loading){
+      this.setState({
+        loading: true
+      });
 
-        let concatedGifs = [...this.state.results.images, ...response.data];
+      fetchGifs(this.props.queryString, this.state.offset + this.state.interval, this.state.interval)
+        .then((response) => {
 
-        //remove duplicate gifs
-        let uniqueGifs = concatedGifs.filter((elem, index, a) => a.findIndex(t => (t.id === elem.id)) === index);
+          if(response.data.length > 0){
+            let concatedGifs = [...this.state.results.images, ...response.data];
 
+            /** remove duplicate gifs */
+            let uniqueGifs = concatedGifs.filter((elem, index, a) => a.findIndex(t => (t.id === elem.id)) === index);
+            this.setState({
+              results:{
+                images: uniqueGifs
+              },
+              offset: this.state.offset + this.state.interval,
+              loading: false
+            });
 
-        this.setState({
-          results:{
-            images: uniqueGifs
-          },
-          offset: this.state.offset + this.state.interval,
-          loading: false
+          }else{
+            this.setState({
+              loading: false
+            });
+          }
         });
-      }
-    );
+    }
+
   }
 
 
@@ -105,12 +113,15 @@ class Results extends React.Component{
   */
   handleScroll = () => {
     if(this.props.search){
-      var lastLi = document.querySelector("ul.results-feed > li:last-child");
-      var lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
-      var pageOffset = window.pageYOffset + window.innerHeight;
-      if (pageOffset > lastLiOffset - 100) {
-        this.loadMore();
+      let lastLi = document.querySelector("ul.results-feed > li:last-child");
+      if(lastLi !== null){
+        let lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
+        let pageOffset = window.pageYOffset + window.innerHeight;
+        if (pageOffset > lastLiOffset - 100) {
+          this.loadMore();
+        }
       }
+
     }
 
   }
@@ -120,7 +131,7 @@ class Results extends React.Component{
       let noResults = !loading && this.state.results.images.length === 0;
 
       return(
-          <div>
+          <section id='results'>
 
             {this.state.results.images.length > 0 &&
 
@@ -140,14 +151,16 @@ class Results extends React.Component{
             }
 
             {loading &&
-              <div>loading...</div>
+              <div className='loading-text'>loading</div>
             }
             {noResults &&
-              <h3>We couldn't find anything. Try again maybe?</h3>
+              <div className="no-results">
+                <h2>We couldn't find anything. <br />Maybe try searching for something different?</h2>
+              </div>
             }
 
 
-        </div>
+        </section>
       )
 
 

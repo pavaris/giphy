@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { searching } from './../actions/searching';
 import { query  } from './../actions/query';
-
-
+import { DebounceInput } from 'react-debounce-input';
 
 class Form extends React.Component {
 
   state = {
     query: '',
   }
-
-
 
   /**
     * Form submission handler
@@ -45,16 +42,11 @@ class Form extends React.Component {
     return (
         <form onSubmit={this.handleSubmit}>
 
-          <input
-             type='search'
-             id='query'
-             className='input-light'
-             placeholder='Search'
-             autoComplete='off'
-             value={this.props.queryString}
-             onChange={this.handleChange}
-           />
-
+          <DebounceInput
+            debounceTimeout={200}
+            onChange={this.handleChange}
+            value={this.props.queryString}
+            />
 
          <button
            type="submit"

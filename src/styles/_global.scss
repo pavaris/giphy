@@ -48,6 +48,7 @@ header{
           background-color: rgba(0,0,0,0.05);
           border-radius: 5px 5px 0 0;
           transition: ease 300ms background-color;
+          color: $purple;
           &:hover{
             background-color: rgba(0,0,0,0.03);
             text-decoration: none;
@@ -93,7 +94,8 @@ h1{
   font-size: 50px;
   font-weight: 900;
   text-transform: uppercase;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  line-height: 1.3em;
   @media (max-width: 767px){
     font-size: 30px;
   }
@@ -102,6 +104,7 @@ h2{
   font-size: 25px;
   font-weight: 700;
   margin-bottom: 20px;
+  line-height: 1.3em;
   @media (max-width: 767px){
     font-size: 22px;
   }
@@ -152,4 +155,12 @@ button{
 
 .section-header{
   margin-bottom: 20px;
+}
+
+.purple{
+  color: $purple;
+}
+
+.teal{
+  color: $teal;
 }

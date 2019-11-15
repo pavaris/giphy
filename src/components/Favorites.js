@@ -13,6 +13,7 @@ class Favorites extends React.Component{
   }
 
   componentDidMount(){
+    window.scrollTo(0, 0);
     fetchRandomGif('sad', 0, 1)
       .then((response) => {
         this.setState({

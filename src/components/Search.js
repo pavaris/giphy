@@ -22,7 +22,10 @@ const Search = (props) => {
         <div className="search-form-inner">
             <div className="content-margins">
               {!props.queryString.length &&
-                <h1>Search for a Gif</h1>
+                <div>
+                  <h1><span class='purple'>GIPHY</span> in a <span className="teal">Jiffy</span></h1>
+                  <h5>Search for a gif!</h5>
+                </div>
               }
               {props.queryString.length > 0 &&
                 <h1>Results for <em>{props.queryString}</em></h1>
