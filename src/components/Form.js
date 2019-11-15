@@ -11,10 +11,7 @@ class Form extends React.Component {
     query: '',
   }
 
-  /**
-    * Form submission handler
-    *
-  */
+  /** Form submission handler */
   handleSubmit = (event) => {
     event.preventDefault();
     this.state.query.length ? this.props.searching(true) : this.props.searching(false);
@@ -25,6 +22,8 @@ class Form extends React.Component {
   /**
     * Input change handler
     * sets component's "query" state
+    * dispatches new query from input
+    * dispatches searching state
   */
   handleChange = (event) => {
 
@@ -62,6 +61,7 @@ class Form extends React.Component {
 
 Form.propTypes = {
   queryString: PropTypes.string.isRequired,
+  search: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -76,5 +76,4 @@ const mapDispatchToProps = {
   query
 };
 
-// export default Form;
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

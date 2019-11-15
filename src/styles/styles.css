@@ -821,3 +821,7 @@ form input[type='text'] {
 #page404 img {
   margin-bottom: 30px;
 }
+
+#page404 h1 {
+  text-align: center;
+}

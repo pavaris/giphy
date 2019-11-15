@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import GiphyItem from './GiphyItem';
 import { fetchRandomGif } from '../utils/api';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 
@@ -12,6 +13,10 @@ class Favorites extends React.Component{
     alt: ''
   }
 
+  /**
+    * Scroll to top on mount
+    * Get random sad gif
+  */
   componentDidMount(){
     window.scrollTo(0, 0);
     fetchRandomGif('sad', 0, 1)
@@ -57,8 +62,9 @@ class Favorites extends React.Component{
   }
 }
 
-
-
+Favorites.propTypes = {
+  favoritedArr: PropTypes.array.isRequired,
+}
 
 const mapStateToProps = (state) => {
   return {

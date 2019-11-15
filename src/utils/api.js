@@ -25,6 +25,3 @@ export const fetchRandomGif = (query, offset, interval) => {
         })
 
 }
-
-
-// TODO: store api key in env var

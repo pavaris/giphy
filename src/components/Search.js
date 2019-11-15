@@ -13,7 +13,6 @@ const Search = (props) => {
 
   let compClassName = props.search ? 'active' : '';
 
-
   return(
     <div id="search-container" className={compClassName}>
 

@@ -33,11 +33,8 @@ const localStorageValidation = (gifArr) => {
 }
 
 /**
-  * sets localStorage 'favoritedGifs' key to an empty arr
+  * removes localStorage 'favoritedGifs' key
 */
 export const initLocalStorage = () => {
   localStorage.removeItem('favoritedGifs');
 }
-
-
-// TODO: store api key in env var

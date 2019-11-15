@@ -19,7 +19,11 @@ class Results extends React.Component{
   }
 
 
-
+  /**
+    * update handler
+    * if this is a new query string, set loading true and fetch new gifs
+    * sets component results.images state with returned array and sets loading false
+  */
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps.queryString !== this.props.queryString){
       this.setState({
@@ -42,7 +46,8 @@ class Results extends React.Component{
 
 
   /**
-    * adds scrolling listener, calls handleScroll
+    * if queryString has value, fetch gifs
+    * adds scrolling listener to run handleScroll
   */
   componentDidMount = () =>{
     if(this.props.queryString.length){
@@ -63,6 +68,10 @@ class Results extends React.Component{
     window.addEventListener('scroll', this.handleScroll);
   }
 
+
+    /**
+      * removes scrolling listener on unmount
+    */
   componentWillUnmount(){
     window.removeEventListener('scroll', this.handleScroll);
   }
