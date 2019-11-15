@@ -18,4 +18,4 @@ Run `npm install` to install node modules and `npm start` to start the app
 
 ## Deployment
 
-Run `npm build` to build for production. Files will be saved in a `build` folder in the root directory
+Run `npm run build` to build for production. Files will be saved in a `build` folder in the root directory

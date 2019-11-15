@@ -13,7 +13,7 @@ const Nav = (props) =>{
               >Search</NavLink>
           </li>
           <li>
-            <NavLink to='/favorites'>Favorites</NavLink>
+            <NavLink to='/favorites' exact>Favorites</NavLink>
         </li>
         </ul>
 

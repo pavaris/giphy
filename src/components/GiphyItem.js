@@ -26,6 +26,7 @@ class GiphyItem extends React.Component{
   handleClick = () => {
     this.setState({
       liked: !this.state.liked,
+      clickedOn: true
     });
     if(!this.state.liked === true){
       this.props.favorited([...this.props.favoritedArr, this.props.giphyObj]);
@@ -46,6 +47,7 @@ class GiphyItem extends React.Component{
 
   render(){
     let compClassName = this.state.liked ? 'giphy-item active' : 'giphy-item';
+    compClassName = this.state.clickedOn && this.state.liked ? compClassName + ' clicked' : compClassName;
     let giphyObj = this.props.giphyObj;
     let styles = {animationDelay: ((this.props.index % 20) * 100) + 'ms' }
 

@@ -23,11 +23,11 @@ class App extends React.Component{
               exact path="/" component={Search}
               />
             <Route
-              path="/favorites" component={Favorites}
+              exact path="/favorites" component={Favorites}
               />
             <Route component={Page404}/>
           </Switch>
-        
+
         </section>
       </Router>
     )
