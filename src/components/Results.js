@@ -193,6 +193,4 @@ const mapStateToProps = (state) => {
 }
 
 
-
-// export default Form;
 export default connect(mapStateToProps)(Results);

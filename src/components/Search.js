@@ -1,9 +1,6 @@
 import React from 'react';
-import { useEffect }  from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-
 import Form from './Form';
 import Results from './Results';
 import { searching } from './../actions/searching';
@@ -51,7 +48,7 @@ Search.propTypes = {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     queryString: state.query,
     search: state.searching

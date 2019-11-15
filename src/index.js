@@ -4,12 +4,9 @@ import './styles/styles.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { getLocalStorage, initLocalStorage } from './utils/localstorage';
-
 import { createStore } from 'redux';
 import { updateLocalStorage } from './utils/localstorage'
-
 import reducer from './reducers'
-
 import { Provider } from 'react-redux';
 
 
