@@ -11,7 +11,9 @@ Create a `.env` file in the root directory and replace `YOUR_API_KEY` with your 
 REACT_APP_GIPHY_KEY=YOUR_API_KEY
 ```
 
+
 Run `npm install` to install node modules and `npm start` to start the app
+
 
 
 ## Deployment
